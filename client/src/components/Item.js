@@ -2,17 +2,19 @@ import React, { memo, useState } from 'react'
 import { GrStar } from 'react-icons/gr'
 import { RiHeartFill, RiHeartLine } from 'react-icons/ri'
 import photo from '../assets/photo_2023-10-07_21-14-04.jpg'
-const Item = () => {
+
+const indexes = [0, 1, 2, 3]
+const Item = ({ images, address, attribute, description, star, title, user }) => {
     const [isHoverHeart, setIsHoverHeart] = useState(false)
     return (
-        <div className='w-full flex border-t border-orange-600 p-4'>
+        <div className='w-full flex border-t border-orange-600 py -4'>
             <div className='w-2/5 flex flex-wrap gap-[2px] items-center relative'>
-                <img src={photo} alt="" className='w-[47%] h-[47%] object-cover' />
-                <img src={photo} alt="" className='w-[47%] h-[47%] object-cover' />
-                <img src={photo} alt="" className='w-[47%] h-[47%] object-cover' />
-                <img src={photo} alt="" className='w-[47%] h-[47%] object-cover' />
-
-                <span className='bg-gray-700 text-white px-2 rounded-md absolute left-1 bottom-2'>4 ảnh</span>
+                {images.length > 0 && images.filter((image, index) => indexes.some(i => i === index))?.map((item, index) => {
+                    return (
+                        <img key={index} src={item} alt="" className='w-[47%] h-[47%] object-cover' />
+                    )
+                })}
+                <span className='bg-gray-700 text-white px-2 rounded-md absolute left-1 bottom-4'>{`${images.length} pics`}</span>
                 <span
                     className='text-white absolute right-5 bottom-1'
                     onMouseOver={() => setIsHoverHeart(true)}
@@ -23,37 +25,41 @@ const Item = () => {
                 </span>
             </div>
             <div className='w-3/5'>
-                <div className='flex justify-content gap-4'>
+                <div className='flex justify-content gap-2'>
                     <div className=''>
-                        <span className='flex py-[2px]'>
+                        <span className='text-red-600 font-medium'>
                             <GrStar className='star-item' color='yellow' size={18} />
                             <GrStar className='star-item' color='yellow' size={18} />
                             <GrStar className='star-item' color='yellow' size={18} />
                             <GrStar className='star-item' color='yellow' size={18} />
                             <GrStar className='star-item' color='yellow' size={18} />
-
+                            {title}
                         </span>
                     </div>
                 </div>
                 <div className='my-2 flex items-center justify-between'>
-                    <span className='font-bold text-green-600'>
-                        3.7tr
+                    <span className='font-bold flex-1 text-green-600 whitespace-nowrap overflow-hidden text-ellipsis'>
+                        {attribute.price}
                     </span>
-                    <span>28m</span>
-                    <span>D7</span>
+                    <span className='flex-1'>{attribute?.acreage}</span>
+                    <span className='flex-1 whitespace-nowrap overflow-hidden text-ellipsis'>
+                        {`${address.split(',')[address.split(',').length - 2]}${address.split(',')[address.split(',').length - 1]}`}
+                    </span>
                 </div>
-                <p className='text-gray-600'>Content</p>
+                <p className='text-gray-500 w-full h-[100px] text-ellipsis overflow-hidden'>
+                    {description.map(item => item + ' ')}
+                </p>
                 <div className='flex items-center my-3 justify-between'>
                     <div className='flex items-center '>
-                        <img src="" alt="avatar" className='w-[30px] h[30px] object-cover rounded-full' />
-                        <p>Name</p>
+                        <img src="https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png" alt="avatar" className='w-[30px] h[30px] object-cover rounded-full' />
+                        <p className='px-2'>{user?.name}</p>
                     </div>
                     <div className='flex items-center gap-1'>
                         <button type='button' className='bg-blue-700 text-white p-1 rounded-md'>
-                            Gọi 123123123
+                            {`Call ${user.phone}`}
                         </button>
                         <button type='button' className='text-blue-700 px-1 rounded-md border border-blue-700'>
-                            Nhắn Zalo
+                            Send message
                         </button>
                     </div>
                 </div>

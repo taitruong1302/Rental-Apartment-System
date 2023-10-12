@@ -19,7 +19,7 @@ const NavBar = () => {
 
 
     return (
-        <div className='w-screen bg-secondary1 text-white flex justify-center items-center h-[40px]'>
+        <div className='bg-secondary1 text-white flex justify-center items-center h-[40px]'>
             <div className='w-3/5 flex h-full items-center text-sm font-medium'>
                 <NavLink to={'/'} className={
                     ({ isActive }) => isActive ? 'hover:bg-secondary2 py-2 px-4 flex items-center bg-secondary2' : 'hover:bg-secondary2 flex items-center py-2 px-4'}>

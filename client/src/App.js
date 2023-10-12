@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="App h-screen w-screen bg-primary">
+    <div className="App bg-primary">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path='*' element={<HomePage />} />
