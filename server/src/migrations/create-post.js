@@ -15,7 +15,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 defaultValue: '0'
             },
-            labelId: {
+            labelCode: {
                 type: Sequelize.STRING
             },
             address: {
@@ -24,7 +24,16 @@ module.exports = {
             attributeId: {
                 type: Sequelize.STRING
             },
-            categoryId: {
+            categoryCode: {
+                type: Sequelize.STRING
+            },
+            priceCode: {
+                type: Sequelize.STRING
+            },
+            acreageCode: {
+                type: Sequelize.STRING
+            },
+            areaCode: {
                 type: Sequelize.STRING
             },
             description: {
@@ -38,6 +47,12 @@ module.exports = {
             },
             imagesId: {
                 type: Sequelize.STRING
+            },
+            priceNumber: {
+                type: Sequelize.FLOAT
+            },
+            acreageNumber: {
+                type: Sequelize.FLOAT
             },
             createdAt: {
                 allowNull: false,

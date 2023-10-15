@@ -3,22 +3,24 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Image extends Model {
+    class Province extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Image.hasOne(models.Post, { foreignKey: 'imagesId', as: 'images' })
+            // define association here
+            //   Province.hasMany(models.Post, { foreignKey: 'userId', as: 'user' })
         }
     }
-    Image.init({
-        image: DataTypes.TEXT,
+    Province.init({
+        code: DataTypes.STRING,
+        value: DataTypes.STRING,
     }, {
         sequelize,
-        modelName: 'Image',
+        modelName: 'Area',
         freezeTableName: true
     });
-    return Image;
+    return Province;
 };

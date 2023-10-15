@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import logo from '../../assets/logo.png'
 import { Button } from '../../components'
 import { TiUserAddOutline } from 'react-icons/ti'
 import { FiLogIn } from 'react-icons/fi'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { path } from '../../utils/constant'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
@@ -12,6 +12,8 @@ const Header = () => {
     const navigate = useNavigate()
     const { isLoggedIn } = useSelector(state => state.auth)
     const dispatch = useDispatch()
+    const headerRef = useRef()
+    const [searchParams] = useSearchParams()
 
     const goToLogin = useCallback((flag) => {
         navigate(path.LOGIN, { state: { isRegister: flag } })
@@ -19,8 +21,13 @@ const Header = () => {
     const goToHome = useCallback(() => {
         navigate(path.HOME)
     }, [])
+
+    useEffect(() => {
+        headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, [searchParams.get('page')])
+
     return (
-        <div className='w-3/5'>
+        <div ref={headerRef} className='w-3/5'>
             <div className='w-full flex items-center justify-between'>
                 <img src={logo} className='h-[70px] w-[240px] object-contain hover:cursor-pointer' alt='logo' onClick={goToHome} />
                 <div className='flex items-center gap-1'>

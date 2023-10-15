@@ -8,7 +8,7 @@ import { BiBuildingHouse } from 'react-icons/bi'
 
 const Search = () => {
     return (
-        <div className='w-3/5 my-4 p-[10px] my-3 bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2'>
+        <div className='w-3/5 p-[10px] my-3 bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2'>
             <SearchItem firstIcon={<BiBuildingHouse />} lastIcon={<HiOutlineBackspace />} fontWeight text={'Bedsit'} />
             <SearchItem firstIcon={<HiOutlineLocationMarker />} lastIcon={<BsChevronRight color='rgb(156, 163, 175)' />} text={'All Areas'} />
             <SearchItem firstIcon={<FaMoneyBill />} lastIcon={<BsChevronRight color='rgb(156, 163, 175)' />} text={'Price'} />

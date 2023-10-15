@@ -1,14 +1,30 @@
 import React, { useEffect } from 'react'
 import { Button, Item } from '../../components'
-import { getPosts } from '../../store/actions/postAction'
+import { getPosts, getLimitPosts } from '../../store/actions/postAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 
 const List = () => {
     const dispatch = useDispatch()
+    const [searchParams, setSearchParams] = useSearchParams()
     const { posts } = useSelector(state => state.post)
+
     useEffect(() => {
-        dispatch(getPosts())
-    }, [])
+        let params = []
+        for (let entry of searchParams.entries()) {
+            params.push(entry);
+        }
+        let searchParamsObject = {}
+        params?.forEach(i => {
+            if (Object.keys(searchParamsObject)?.some(item => item === i[0])) {
+                searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]]
+            } else {
+                searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] }
+            }
+        })
+        dispatch(getLimitPosts(searchParamsObject))
+    }, [searchParams])
+
     return (
         <div className='w-full p-2 bg-white shadow-md rounded-md px-6'>
             <div className='flex items-center justify-between'>
@@ -32,6 +48,7 @@ const List = () => {
                             star={+item?.star}
                             title={item?.title}
                             user={item?.user}
+                            id={item?.id}
                         />
                     )
                 })}

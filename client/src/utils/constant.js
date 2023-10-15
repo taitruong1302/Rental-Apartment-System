@@ -1,10 +1,12 @@
 export const path = {
     HOME: '/*',
+    HOME_PAGE: '/:page',
     LOGIN: 'login',
     APARTMENT: 'apartments-for-rent',
     PREMISES: 'premises-for-rent',
     BEDSIT: 'bedsits-for-rent',
-    HOUSES: 'houses-for-rent'
+    HOUSES: 'houses-for-rent',
+    DETAIL_POST__TITLE__POSTID: 'detail/:title/:postId'
 }
 
 export const location = [

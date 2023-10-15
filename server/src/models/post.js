@@ -18,14 +18,19 @@ module.exports = (sequelize, DataTypes) => {
     Post.init({
         title: DataTypes.STRING,
         star: DataTypes.STRING,
-        labelId: DataTypes.STRING,
+        labelCode: DataTypes.STRING,
         address: DataTypes.STRING,
-        attributeId: DataTypes.STRING,
-        categoryId: DataTypes.STRING,
+        attributesId: DataTypes.STRING,
+        categoryCode: DataTypes.STRING,
+        priceCode: DataTypes.STRING,
+        acreageCode: DataTypes.STRING,
+        areaCode: DataTypes.STRING,
         description: DataTypes.TEXT,
         userId: DataTypes.STRING,
         overviewId: DataTypes.STRING,
-        imagesId: DataTypes.STRING
+        imagesId: DataTypes.STRING,
+        priceNumber: DataTypes.FLOAT,
+        acreageNumber: DataTypes.FLOAT,
     }, {
         sequelize,
         modelName: 'Post',

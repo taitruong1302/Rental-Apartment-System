@@ -1,14 +1,24 @@
 import React, { memo, useState } from 'react'
 import { GrStar } from 'react-icons/gr'
 import { RiHeartFill, RiHeartLine } from 'react-icons/ri'
-import photo from '../assets/photo_2023-10-07_21-14-04.jpg'
+import { useNavigate, Link } from 'react-router-dom'
+import { formatLink } from '../utils/common/formatLink'
 
 const indexes = [0, 1, 2, 3]
-const Item = ({ images, address, attribute, description, star, title, user }) => {
+const Item = ({ images, address, attribute, description, star, title, user, id }) => {
     const [isHoverHeart, setIsHoverHeart] = useState(false)
+    const navigate = useNavigate()
+
+    const handleStar = (star) => {
+        let stars = []
+        for (let i = 0; i < +star; i++) {
+            stars.push(<GrStar className='star-item' color='yellow' size={18} />)
+        }
+        return stars
+    }
     return (
         <div className='w-full flex border-t border-orange-600 py -4'>
-            <div className='w-2/5 flex flex-wrap gap-[2px] items-center relative'>
+            <Link to={`detail/${formatLink(title)}/${id}`} className='w-2/5 flex flex-wrap gap-[2px] items-center relative'>
                 {images.length > 0 && images.filter((image, index) => indexes.some(i => i === index))?.map((item, index) => {
                     return (
                         <img key={index} src={item} alt="" className='w-[47%] h-[47%] object-cover' />
@@ -23,16 +33,16 @@ const Item = ({ images, address, attribute, description, star, title, user }) =>
                     {isHoverHeart ? <RiHeartFill size={26} color='red' /> : <RiHeartLine size={26} />}
 
                 </span>
-            </div>
+            </Link>
             <div className='w-3/5'>
                 <div className='flex justify-content gap-2'>
                     <div className=''>
                         <span className='text-red-600 font-medium'>
-                            <GrStar className='star-item' color='yellow' size={18} />
-                            <GrStar className='star-item' color='yellow' size={18} />
-                            <GrStar className='star-item' color='yellow' size={18} />
-                            <GrStar className='star-item' color='yellow' size={18} />
-                            <GrStar className='star-item' color='yellow' size={18} />
+                            {handleStar(+star).map((star, index) => {
+                                return (
+                                    <span key={index}>{star}</span>
+                                )
+                            })}
                             {title}
                         </span>
                     </div>
