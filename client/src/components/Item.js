@@ -62,7 +62,7 @@ const Item = ({ images, address, attribute, description, star, title, user, id }
                 <div className='flex items-center my-3 justify-between'>
                     <div className='flex items-center '>
                         <img src="https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png" alt="avatar" className='w-[30px] h[30px] object-cover rounded-full' />
-                        <p className='px-2'>{user?.name}</p>
+                        <p className='px-2 max-w-[110px]'>{user?.name}</p>
                     </div>
                     <div className='flex items-center gap-1'>
                         <button type='button' className='bg-blue-700 text-white p-1 rounded-md'>
