@@ -54,14 +54,13 @@ export const getNewPostsService = () => new Promise(async (resolve, reject) => {
             raw: true,
             nest: true,
             offset: 0,
-            order: ['createdAt', 'DESC'],
+            order: [['createdAt', 'DESC']],
             limit: +process.env.LIMIT,
             include: [
                 { model: db.Image, as: 'images', attributes: ['image'] },
                 { model: db.Attribute, as: 'attribute', attributes: ['price', 'acreage', 'published', 'hashtag'] },
-                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] }
             ],
-            attributes: ['id', 'title', 'star', 'address', 'description']
+            attributes: ['id', 'title', 'star', 'createdAt']
         })
         resolve({
             err: response ? 0 : 1,

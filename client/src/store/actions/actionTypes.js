@@ -9,7 +9,8 @@ const actionTypes = {
     GET_LIMIT_POSTS: 'GET_LIMIT_POSTS',
     GET_CATEGORIES: 'GET_CATEGORIES',
     GET_PRICES: 'GET_PRICES',
-    GET_ACREAGE: 'GET_ACREAGE'
+    GET_ACREAGE: 'GET_ACREAGE',
+    GET_NEW_POST: 'GET_NEW_POST',
 }
 
 export default actionTypes

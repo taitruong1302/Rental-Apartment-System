@@ -47,3 +47,27 @@ export const getLimitPosts = (query) => async (dispatch) => {
         })
     }
 }
+
+export const getNewPosts = () => async (dispatch) => {
+    try {
+        const response = await postService.apiGetNewPosts()
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.GET_NEW_POST,
+                newPosts: response.data.response
+            })
+        }
+        else {
+            dispatch({
+                type: actionTypes.GET_LIMIT_POSTS,
+                msg: response.data.msg,
+                newPosts: null
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_LIMIT_POSTS,
+            newPosts: null
+        })
+    }
+}
