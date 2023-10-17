@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { PageNumber } from '../../components'
 import { useSelector } from 'react-redux'
-import { RxTrackNext, RxTrackPrevious } from 'react-icons/rx'
+import { RxTrackNext } from 'react-icons/rx'
 import { useSearchParams } from 'react-router-dom'
 
 const Pagination = () => {

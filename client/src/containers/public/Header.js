@@ -17,10 +17,10 @@ const Header = () => {
 
     const goToLogin = useCallback((flag) => {
         navigate(path.LOGIN, { state: { isRegister: flag } })
-    }, [])
+    })
     const goToHome = useCallback(() => {
         navigate(path.HOME)
-    }, [])
+    })
 
     useEffect(() => {
         headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })

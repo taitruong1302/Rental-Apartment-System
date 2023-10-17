@@ -12,6 +12,9 @@ function App() {
           <Route path='*' element={<HomePage />} />
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.APARTMENT} element={<Rental />} />
+          <Route path={path.BEDSIT} element={<Rental />} />
+          <Route path={path.HOUSES} element={<Rental />} />
+          <Route path={path.PREMISES} element={<Rental />} />
           <Route path={'detail/*'} element={<DetailPost />} />
         </Route>
       </Routes>

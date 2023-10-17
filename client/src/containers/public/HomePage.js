@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { List, Pagination } from './index'
 import { Location, ItemSideBar, RelatedPost } from '../../components'
 import { useSearchParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux/'
+import { useSelector } from 'react-redux/'
 
 
 
 const HomePage = () => {
-    let [searchParams, setSearchParams] = useSearchParams();
+    let [searchParams] = useSearchParams();
     const { categories, prices, acreage } = useSelector(state => state.app)
-
-
-
 
     return (
         <div className='w-full flex flex-col gap-3'>

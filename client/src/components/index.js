@@ -10,4 +10,5 @@ export { default as Footer } from './Footer'
 export { default as Contact } from './Contact'
 export { default as RelatedPost } from './RelatedPost'
 export { default as SmallItem } from './SmallItem'
+export { default as SearchModal } from './SearchModal'
 

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Button, Item } from '../../components'
-import { getPosts, getLimitPosts } from '../../store/actions/postAction'
+import { getLimitPosts } from '../../store/actions/postAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 
 const List = ({ categoryCode }) => {
     const dispatch = useDispatch()
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const { posts } = useSelector(state => state.post)
 
     useEffect(() => {

@@ -4,7 +4,8 @@ const initState = {
     categories: [],
     msg: '',
     prices: [],
-    acreage: []
+    acreage: [],
+    areas: []
 }
 
 const appReducer = (state = initState, action) => {
@@ -25,6 +26,12 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 acreage: action.acreage || [],
+                msg: action.msg || '',
+            }
+        case actionTypes.GET_AREAS:
+            return {
+                ...state,
+                areas: action.areas || [],
                 msg: action.msg || '',
             }
         default:

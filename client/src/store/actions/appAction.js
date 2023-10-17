@@ -7,7 +7,8 @@ export const getCategories = () => async (dispatch) => {
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.GET_CATEGORIES,
-                categories: response.data.response
+                categories: response.data.response,
+                msg: ''
             })
         }
         else {
@@ -20,7 +21,8 @@ export const getCategories = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.GET_CATEGORIES,
-            categories: null
+            categories: null,
+            msg: error
         })
     }
 }
@@ -31,7 +33,8 @@ export const getPrices = () => async (dispatch) => {
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.GET_PRICES,
-                prices: response.data.response.sort((a, b) => +a.order - +b.order)
+                prices: response.data.response.sort((a, b) => +a.order - +b.order),
+                msg: ''
             })
         }
         else {
@@ -44,7 +47,8 @@ export const getPrices = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.GET_PRICES,
-            prices: null
+            prices: null,
+            msg: error
         })
     }
 }
@@ -55,7 +59,8 @@ export const getAcreage = () => async (dispatch) => {
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.GET_ACREAGE,
-                acreage: response.data.response.sort((a, b) => +a.order - +b.order)
+                acreage: response.data.response.sort((a, b) => +a.order - +b.order),
+                msg: ''
             })
         }
         else {
@@ -68,7 +73,33 @@ export const getAcreage = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.GET_ACREAGE,
-            prices: null
+            acreage: null,
+            msg: error
+        })
+    }
+}
+export const getAreas = () => async (dispatch) => {
+    try {
+        const response = await api.apiGetAreas()
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.GET_AREAS,
+                areas: response.data.response,
+                msg: ''
+            })
+        }
+        else {
+            dispatch({
+                type: actionTypes.GET_AREAS,
+                msg: response.data.msg,
+                areas: null
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_AREAS,
+            areas: null,
+            msg: error
         })
     }
 }

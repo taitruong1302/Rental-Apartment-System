@@ -2,15 +2,16 @@ import React, { useEffect } from 'react'
 import Header from './Header'
 import { Outlet } from 'react-router-dom'
 import { NavBar, Search } from './index'
-import { Footer, Contact } from '../../components'
+import { Footer } from '../../components'
 import * as actions from '../../store/actions'
-import { useDispatch, useSelector } from 'react-redux/'
+import { useDispatch } from 'react-redux/'
 
 const Home = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(actions.getPrices())
         dispatch(actions.getAcreage())
+        dispatch(actions.getAreas())
     }, [])
     return (
         <div className='w-full flex flex-col gap-4 items-center h-full border'>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { List, Pagination } from './index'
 import { Location, ItemSideBar, RelatedPost } from '../../components'
-import { useSearchParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux/'
-import * as actions from '../../store/actions'
+import { useSelector } from 'react-redux/'
 import { useLocation, useParams } from 'react-router-dom'
 import { formatLink } from '../../utils/common/formatLink'
 
@@ -12,7 +10,6 @@ const Rental = () => {
     const [categoryCode, setCategoryCode] = useState('none')
     const location = useLocation()
     const params = useParams()
-    const dispatch = useDispatch()
 
     useEffect(() => {
         const category = categories?.find(item => `/${formatLink(item.value)}` === location.pathname) || params

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { apiGetCategories } from '../../services/categoryService'
 import { formatLink } from '../../utils/common/formatLink'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../store/actions'

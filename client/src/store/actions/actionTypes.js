@@ -11,6 +11,7 @@ const actionTypes = {
     GET_PRICES: 'GET_PRICES',
     GET_ACREAGE: 'GET_ACREAGE',
     GET_NEW_POST: 'GET_NEW_POST',
+    GET_AREAS: 'GET_AREAS',
 }
 
 export default actionTypes
