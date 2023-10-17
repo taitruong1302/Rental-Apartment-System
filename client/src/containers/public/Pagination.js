@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 import { RxTrackNext, RxTrackPrevious } from 'react-icons/rx'
 import { useSearchParams } from 'react-router-dom'
 
-const Pagination = ({ page }) => {
+const Pagination = () => {
     const { count, posts } = useSelector(state => state.post)
     const [arrPage, setArrPage] = useState([])
-    const [currentPage, setCurrentPage] = useState(+page)
+    const [currentPage, setCurrentPage] = useState(1)
     const [isHideEnd, setIsHideEnd] = useState(false)
     const [isHideStart, setIsHideStart] = useState(false)
     const [searchParams] = useSearchParams()

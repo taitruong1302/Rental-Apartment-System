@@ -66,8 +66,8 @@ export const insertService = () => new Promise(async (resolve, reject) => {
                     userId,
                     overviewId,
                     imagesId,
-                    acreageCode: dataArea.find(area => area.max >= currentAcreage && area.min <= currentAcreage)?.code,
-                    priceCode: dataPrice.find(area => area.max >= currentPrice && area.min <= currentPrice)?.code,
+                    acreageCode: dataArea.find(area => area.max > currentAcreage && area.min <= currentAcreage)?.code,
+                    priceCode: dataPrice.find(area => area.max > currentPrice && area.min <= currentPrice)?.code,
                     areaCode,
                     priceNumber: getNumberFromStringV2(item?.header?.attributes?.price),
                     acreageNumber: getNumberFromStringV2(item?.header?.attributes?.acreage)
