@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { DetailPost, Home, HomePage, Login, Rental } from "./containers/public";
+import { DetailPost, Home, HomePage, Login, Rental, SearchDetail } from "./containers/public";
 import { path } from "./utils/constant";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +15,8 @@ function App() {
           <Route path={path.BEDSIT} element={<Rental />} />
           <Route path={path.HOUSES} element={<Rental />} />
           <Route path={path.PREMISES} element={<Rental />} />
+          <Route path={path.SEARCH} element={<SearchDetail />} />
+          <Route path={path.DETAIL_POST__TITLE__POSTID} element={<DetailPost />} />
           <Route path={'detail/*'} element={<DetailPost />} />
         </Route>
       </Routes>

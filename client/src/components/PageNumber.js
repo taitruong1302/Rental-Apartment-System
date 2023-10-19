@@ -17,8 +17,12 @@ const PageNumber = ({ text, currentPage, icon, setCurrentPage }) => {
             params.push(entry)
         }
         let searchParamsObject = {}
-        params?.map(i => {
-            searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] }
+        params?.forEach(i => {
+            if (Object.keys(searchParamsObject)?.some(item => item === i[0] && item !== 'page')) {
+                searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]]
+            } else {
+                searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] }
+            }
         })
         return searchParamsObject
     }
