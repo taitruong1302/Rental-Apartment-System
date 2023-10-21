@@ -2,7 +2,8 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
     isLoggedIn: false,
-    token: null
+    token: null,
+    msg: ''
 }
 
 const authReducer = (state = initState, action) => {
@@ -12,7 +13,7 @@ const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                token: action.data.token,
+                token: action.data,
                 msg: 'Login successfully'
             }
         case actionTypes.REGISTER_FAIL:

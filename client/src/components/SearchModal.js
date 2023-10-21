@@ -82,13 +82,9 @@ const SearchModal = ({ setIsShowModal, content, name, handleSubmit, query, arrMi
         let min = percent1 < percent2 ? percent1 : percent2
         let max = percent1 < percent2 ? percent2 : percent1
         let arrMinMax = [convert100toTarget(percent1), convert100toTarget(percent2)]
-        const gaps = name === 'price'
-            ? getCodesPrice(arrMinMax, content)
-            : name === 'acreage'
-                ? getCodesAcreage(arrMinMax, content)
-                : []
+
         handleSubmit(e, {
-            [`${name}Code`]: gaps?.map(item => item.code),
+            [`${name}Number`]: arrMinMax,
             [name]: `From ${convert100toTarget(min)} - ${convert100toTarget(max)} ${name === 'price' ? 'M' : 'm2'}`
 
         }, {

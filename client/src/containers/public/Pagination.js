@@ -19,7 +19,7 @@ const Pagination = () => {
     }, [searchParams])
 
     useEffect(() => {
-        let maxPage = Math.ceil(count / parseInt(process.env.REACT_APP_LIMIT_POSTS, 10))
+        let maxPage = Math.ceil(count / process.env.REACT_APP_LIMIT_POSTS)
         let end = (currentPage + 2) > maxPage ? maxPage : (currentPage + 2)
         let start = (currentPage - 2) <= 1 ? 1 : (currentPage - 2)
         let temp = []
@@ -43,7 +43,7 @@ const Pagination = () => {
                 )
             })}
             {!isHideEnd && <PageNumber text={'...'} />}
-            {!isHideEnd && <PageNumber icon={<RxTrackNext />} setCurrentPage={setCurrentPage} text={Math.floor(count / posts.length)} />}
+            {!isHideEnd && <PageNumber icon={<RxTrackNext />} setCurrentPage={setCurrentPage} text={Math.ceil(count / posts.length)} />}
         </div>
     )
 }

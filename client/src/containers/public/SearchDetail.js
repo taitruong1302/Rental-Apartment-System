@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { List, Pagination } from './index'
 import { ItemSideBar, RelatedPost } from '../../components'
 import { useSelector } from 'react-redux/'

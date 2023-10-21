@@ -11,4 +11,5 @@ export { default as Contact } from './Contact'
 export { default as RelatedPost } from './RelatedPost'
 export { default as SmallItem } from './SmallItem'
 export { default as SearchModal } from './SearchModal'
+export { default as UserInfo } from './UserInfo'
 

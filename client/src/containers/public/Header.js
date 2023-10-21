@@ -1,19 +1,24 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import logo from '../../assets/logo.png'
-import { Button } from '../../components'
+import { Button, UserInfo } from '../../components'
 import { TiUserAddOutline } from 'react-icons/ti'
 import { FiLogIn } from 'react-icons/fi'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { AiOutlineDown } from 'react-icons/ai'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { path } from '../../utils/constant'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
+import menuManagement from '../../utils/menuManagament'
+import { LuLogOut } from 'react-icons/lu'
 
 const Header = () => {
     const navigate = useNavigate()
     const { isLoggedIn } = useSelector(state => state.auth)
+    const { currentUser } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const headerRef = useRef()
     const [searchParams] = useSearchParams()
+    const [isShowMenu, setIsShowMenu] = useState(false)
 
     const goToLogin = useCallback((flag) => {
         navigate(path.LOGIN, { state: { isRegister: flag } })
@@ -50,17 +55,33 @@ const Header = () => {
                         </div>
                     }
                     {isLoggedIn &&
-                        <div className='flex items-center gap-1'>
+                        <div className='flex items-center gap-3 relative'>
+                            <UserInfo />
                             <Button
-                                text='Log out'
+                                text='Manage Account'
                                 textColor='text-white'
                                 bgColor='bg-[#3961fb]'
-                                ButtonIcon={FiLogIn}
-                                onClick={() => {
+                                ButtonIcon={AiOutlineDown}
+                                px='px-4'
+                                onClick={() => setIsShowMenu(prev => !prev)}
+                            />
+                            {isShowMenu && <div className='absolute top-full right-0 bg-white shadow-md rounded-md p-4 min-w-[200px] flex flex-col gap-2'>
+                                {menuManagement.map(item => {
+                                    return (
+                                        <Link className='hover:text-orange-600 flex items-center gap-2 text-blue-600 border-b border-gray-200 py-2' key={item.id} to={item?.path}>
+                                            {item?.icon}
+                                            {item.text}
+                                        </Link>
+                                    )
+                                })}
+                                <span className='cursor-pointer hover:text-orange-600 text-blue-500 py-2 flex gap-2 items-center' onClick={() => {
                                     dispatch(actions.logout())
                                     goToLogin(false)
-                                }}
-                            />
+                                }}>
+                                    {<LuLogOut />}Logout
+                                </span>
+                            </div>}
+
                         </div>
                     }
                     <Button

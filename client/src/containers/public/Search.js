@@ -21,7 +21,7 @@ const Search = () => {
     const location = useLocation()
 
     useEffect(() => {
-        if (!location.pathname.includes(path.SEARCH)) {
+        if (!location?.pathname.includes(path.SEARCH)) {
             setArrMinMax({})
             setQueries({})
         }
@@ -42,7 +42,7 @@ const Search = () => {
     }, [queries, isShowModal])
 
     const handleSearch = () => {
-        const queryCodes = Object.entries(queries).filter(item => item[0].includes('Code')).filter(item => item[1])
+        const queryCodes = Object.entries(queries).filter(item => item[0].includes('Code') || item[0].includes('Number')).filter(item => item[1])
         const queryCodesObj = {}
         queryCodes.forEach(item => {
             queryCodesObj[item[0]] = item[1]

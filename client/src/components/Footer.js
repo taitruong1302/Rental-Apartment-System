@@ -8,7 +8,7 @@ import { path } from '../utils/constant'
 
 const Footer = () => {
     return (
-        <div className='w-3/5 flex bg-white rounded-md shadow-md p-4 justify-between'>
+        <div className='w-4/5 flex bg-white rounded-md shadow-md p-4 justify-between'>
             <img src={logo} alt="logo" className='h-[200px] object-contain' />
             <div className='flex flex-col'>
                 <h3 className='font-semibold text-lg'>About Us</h3>
@@ -20,7 +20,6 @@ const Footer = () => {
                 <span className='flex items-center'><GrLocation />Address: xxx</span>
                 <span className='flex items-center'><GrPhone />Hotline: 0943xxxxxx</span>
                 <span className='flex items-center'><HiOutlineMailOpen />rentalapartment@gmail.com</span>
-
             </div>
         </div>
     )

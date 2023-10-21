@@ -12,6 +12,8 @@ const actionTypes = {
     GET_ACREAGE: 'GET_ACREAGE',
     GET_NEW_POST: 'GET_NEW_POST',
     GET_AREAS: 'GET_AREAS',
+
+    GET_CURRENT_USER: 'GET_CURRENT_USER'
 }
 
 export default actionTypes

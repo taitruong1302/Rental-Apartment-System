@@ -3,6 +3,7 @@ import { GrStar } from 'react-icons/gr'
 import { RiHeartFill, RiHeartLine } from 'react-icons/ri'
 import { useNavigate, Link } from 'react-router-dom'
 import { formatLink } from '../utils/common/formatLink'
+import avatar from '../assets/logo.png'
 
 const indexes = [0, 1, 2, 3]
 const Item = ({ images, address, attribute, description, star, title, user, id }) => {
@@ -61,7 +62,7 @@ const Item = ({ images, address, attribute, description, star, title, user, id }
                 </p>
                 <div className='flex items-center my-3 justify-between'>
                     <div className='flex items-center '>
-                        <img src="https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png" alt="avatar" className='w-[30px] h[30px] object-cover rounded-full' />
+                        <img src={avatar} alt="avatar" className='w-[30px] h[30px] object-cover rounded-full' />
                         <p className='px-2 max-w-[110px]'>{user?.name}</p>
                     </div>
                     <div className='flex items-center gap-1'>
