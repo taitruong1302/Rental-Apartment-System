@@ -5,24 +5,18 @@ import { NavBar, Search } from './index'
 import { Footer } from '../../components'
 import * as actions from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux/'
-import { apiGetCurrentUserInfor } from '../../services/userService'
 
 const Home = () => {
     const dispatch = useDispatch()
-    const { isLoggedIn, token } = useSelector(state => state.auth)
-    const { currentUser } = useSelector(state => state.user)
+    const { isLoggedIn } = useSelector(state => state.auth)
+
 
     useEffect(() => {
         dispatch(actions.getPrices())
         dispatch(actions.getAcreage())
         dispatch(actions.getAreas())
     }, [])
-    useEffect(() => {
-        setTimeout(() => {
-            isLoggedIn && dispatch(actions.getCurrentUserInfor())
-        }, 100)
 
-    }, [isLoggedIn])
     return (
         <div className='w-full min-h-screen flex flex-col gap-4 items-center h-full border'>
             <Header />

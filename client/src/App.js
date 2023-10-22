@@ -3,8 +3,22 @@ import { DetailPost, Home, HomePage, Login, Rental, SearchDetail } from "./conta
 import { path } from "./utils/constant";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { System, CreatePost } from './containers/system'
+import { useEffect } from "react";
+import * as actions from './store/actions'
+import { useDispatch, useSelector } from 'react-redux/'
 
 function App() {
+  const dispatch = useDispatch()
+  const { currentUser } = useSelector(state => state.user)
+  const { isLoggedIn, token } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    setTimeout(() => {
+      isLoggedIn && dispatch(actions.getCurrentUserInfor())
+    }, 100)
+
+  }, [isLoggedIn])
   return (
     <div className="App bg-primary h-auto">
       <Routes>
@@ -19,7 +33,12 @@ function App() {
           <Route path={path.DETAIL_POST__TITLE__POSTID} element={<DetailPost />} />
           <Route path={'detail/*'} element={<DetailPost />} />
         </Route>
+
+        <Route path={path.SYSTEM} element={<System />}>
+          <Route path={path.CREATE_POST} element={<CreatePost />} />
+        </Route>
       </Routes>
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

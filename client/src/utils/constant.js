@@ -7,7 +7,9 @@ export const path = {
     BEDSIT: 'bedsits-for-rent',
     HOUSES: 'houses-for-rent',
     DETAIL_POST__TITLE__POSTID: 'detail/:title/:postId',
-    SEARCH: 'search'
+    SEARCH: 'search',
+    SYSTEM: '/system/*',
+    CREATE_POST: 'create-new-post'
 }
 
 export const location = [
