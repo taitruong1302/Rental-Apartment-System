@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             Post.belongsTo(models.Image, { foreignKey: 'imagesId', targetKey: 'id', as: 'images' })
             Post.belongsTo(models.Attribute, { foreignKey: 'attributeId', targetKey: 'id', as: 'attribute' })
+            Post.belongsTo(models.Overview, { foreignKey: 'overviewId', targetKey: 'id', as: 'overview' })
             Post.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id', as: 'user' })
         }
     }
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         star: DataTypes.STRING,
         labelCode: DataTypes.STRING,
         address: DataTypes.STRING,
-        attributesId: DataTypes.STRING,
+        attributeId: DataTypes.STRING,
         categoryCode: DataTypes.STRING,
         priceCode: DataTypes.STRING,
         acreageCode: DataTypes.STRING,
