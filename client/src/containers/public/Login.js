@@ -3,7 +3,7 @@ import { InputForm, Button } from '../../components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as actions from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
-
+import validate from '../../utils/common/validateFields'
 
 const Login = () => {
     const location = useLocation()
@@ -28,35 +28,12 @@ const Login = () => {
             phone: payload.phone,
             password: payload.password
         }
-        let invalids = validate(finalPayload)
+        let invalids = validate(finalPayload, setInvalidFields)
         if (invalids === 0) {
             isRegister ? dispatch(actions.register(payload)) : dispatch(actions.login(payload));
         }
     }
 
-    const validate = (payload) => {
-        let invalids = 0
-        let fields = Object.entries(payload)
-        setInvalidFields([])
-        fields.forEach(item => {
-            if (item[1] === '') {
-                setInvalidFields(prev => [...prev, {
-                    name: item[0],
-                    message: 'This field is mandatory'
-                }])
-                invalids++
-            }
-        })
-        fields.forEach(item => {
-            if (!+item[1] && item[0] === 'phone') {
-                setInvalidFields(prev => [...prev, {
-                    name: item[0],
-                    message: 'Invalid Phone Number'
-                }])
-            }
-        })
-        return invalids
-    }
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='bg-white min-w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm'>

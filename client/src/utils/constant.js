@@ -9,7 +9,8 @@ export const path = {
     DETAIL_POST__TITLE__POSTID: 'detail/:title/:postId',
     SEARCH: 'search',
     SYSTEM: '/system/*',
-    CREATE_POST: 'create-new-post'
+    CREATE_POST: 'create-new-post',
+    MANAGE_POST: 'manage-post'
 }
 
 export const location = [

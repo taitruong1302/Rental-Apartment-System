@@ -1,6 +1,12 @@
 import React from 'react'
 
-const Select = ({ label, options, value, setValue, type, reset }) => {
+const Select = ({ label, options, value, setValue, type, reset, name, invalidFields, setInvalidFields }) => {
+    const handleTextError = () => {
+        let nameInvalid = invalidFields?.find(item => item.name === name)
+        let addressInvalid = invalidFields?.find(item => item.name === 'address')
+
+        return `${nameInvalid ? nameInvalid.message : ''}` || `${addressInvalid ? addressInvalid.message : ''}`
+    }
     return (
         <div className='flex flex-col gap-2 flex-1'>
             <label className='font-medium' htmlFor='select-address'>{label}</label>
@@ -8,7 +14,10 @@ const Select = ({ label, options, value, setValue, type, reset }) => {
                 value={reset ? '' : value}
                 id='select-address'
                 className='outline-none border border-gray-300 px-1 w-full rounded-md'
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => !name ? setValue(e.target.value) : setValue(prev => ({ ...prev, [name]: e.target.value }))}
+                onFocus={() => {
+                    setInvalidFields([])
+                }}
             >
                 <option value="">{`--Select ${label}--`}</option>
                 {options?.map(item => {
@@ -22,7 +31,9 @@ const Select = ({ label, options, value, setValue, type, reset }) => {
                     )
                 })}
             </select>
-
+            (invalidFields && <small className='text-red-500'>
+                {handleTextError()}
+            </small>)
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { DetailPost, Home, HomePage, Login, Rental, SearchDetail } from "./conta
 import { path } from "./utils/constant";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { System, CreatePost } from './containers/system'
+import { System, CreatePost, ManagePost } from './containers/system'
 import { useEffect } from "react";
 import * as actions from './store/actions'
 import { useDispatch, useSelector } from 'react-redux/'
@@ -19,6 +19,12 @@ function App() {
     }, 100)
 
   }, [isLoggedIn])
+
+  useEffect(() => {
+    dispatch(actions.getPrices())
+    dispatch(actions.getAcreage())
+    dispatch(actions.getAreas())
+  }, [])
   return (
     <div className="App bg-primary h-auto">
       <Routes>
@@ -36,6 +42,7 @@ function App() {
 
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_POST} element={<CreatePost />} />
+          <Route path={path.MANAGE_POST} element={<ManagePost />} />
         </Route>
       </Routes>
 
