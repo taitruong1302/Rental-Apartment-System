@@ -18,3 +18,17 @@ export const getCurrentUserInfor = (id) => new Promise(async (resolve, reject) =
         reject()
     }
 })
+
+export const updateUserInfor = (id, payload) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.User.update(payload, {
+            where: { id: id }
+        })
+        resolve({
+            err: response[0] > 0 ? 0 : 1,
+            msg: response[0] > 0 ? 'OK' : 'Update user infor failed',
+        })
+    } catch (error) {
+        reject()
+    }
+})

@@ -3,7 +3,7 @@ import { DetailPost, Home, HomePage, Login, Rental, SearchDetail } from "./conta
 import { path } from "./utils/constant";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { System, CreatePost, ManagePost } from './containers/system'
+import { System, CreatePost, ManagePost, EditAccount } from './containers/system'
 import { useEffect } from "react";
 import * as actions from './store/actions'
 import { useDispatch, useSelector } from 'react-redux/'
@@ -43,6 +43,7 @@ function App() {
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_POST} element={<CreatePost />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
+          <Route path={path.EDIT_ACCOUNT} element={<EditAccount />} />
         </Route>
       </Routes>
 

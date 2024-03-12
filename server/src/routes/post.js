@@ -8,8 +8,9 @@ router.get('/getLimit', postController.getLimitPosts)
 router.get('/getNewPost', postController.getNewPosts)
 
 router.use(verifyToken)
-router.get('/createNewPost', postController.createNewPost)
+router.post('/createNewPost', postController.createNewPost)
 router.get('/limitAdmin', postController.getAdminLimitPosts)
 router.put('/updatePost', postController.updatePost)
+router.delete('/deletePost', postController.deletePost)
 
 export default router

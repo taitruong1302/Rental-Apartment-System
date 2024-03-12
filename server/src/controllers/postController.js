@@ -58,9 +58,9 @@ export const getNewPosts = async (req, res) => {
 
 export const createNewPost = async (req, res) => {
     try {
-        const { categoryCode, title, priceNumber, areaNumber, label } = req.body
+        const { categoryCode, title, priceNumber, acreageNumber, label } = req.body
         const { id } = req.user
-        if (!categoryCode || !id || !title || !priceNumber || !areaNumber || !label)
+        if (!categoryCode || !id || !title || !priceNumber || !acreageNumber || !label)
             return res.status(400).json({
                 err: 1,
                 msg: 'Missing fields'
@@ -85,6 +85,26 @@ export const updatePost = async (req, res) => {
                 msg: 'Missing inputs'
             })
         const response = await postService.updatePost(req.body)
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Failed at post controller ' + error
+        })
+    }
+}
+
+export const deletePost = async (req, res) => {
+    const { postId } = req.query
+    const { id } = req.user
+    try {
+        if (!postId || !id) {
+            return res.status(400), json({
+                err: 1,
+                msg: 'Missing Field'
+            })
+        }
+        const response = await postService.deletePost(postId)
         return res.status(200).json(response)
     } catch (error) {
         return res.status(500).json({

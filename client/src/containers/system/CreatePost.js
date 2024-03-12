@@ -21,12 +21,12 @@ const CreatePost = ({ isEdit }) => {
             title: dataEdit?.title || '',
             priceNumber: dataEdit?.priceNumber * 1000000 || 0,
             acreageNumber: dataEdit?.acreageNumber || 0,
-            images: JSON.parse(dataEdit?.images?.image) || '',
+            images: dataEdit?.images?.image ? JSON.parse(dataEdit?.images?.image) : '',
             address: dataEdit?.address || '',
             priceCode: dataEdit?.priceCode || '',
             acreageCode: dataEdit?.acreageNumber || '',
-            description: JSON.parse(dataEdit?.description) || '',
-            target: dataEdit?.target || '',
+            description: dataEdit?.description ? JSON.parse(dataEdit?.description) : '',
+            target: dataEdit?.overview?.target || '',
             area: dataEdit?.area || ''
         }
         return initData
@@ -34,12 +34,11 @@ const CreatePost = ({ isEdit }) => {
     const [imagesPreview, setImagesPreview] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const { prices, categories, acreage } = useSelector(state => state.app)
-    const { currentData } = useSelector(state => state.user)
+    const { currentUser } = useSelector(state => state.user)
     const [invalidFields, setInvalidFields] = useState([])
-
     useEffect(() => {
         if (dataEdit) {
-            let images = JSON.parse(dataEdit?.images?.image)
+            let images = dataEdit?.images?.image && JSON.parse(dataEdit?.images?.image)
             images && setImagesPreview(images)
         }
     }, [dataEdit])
@@ -51,7 +50,7 @@ const CreatePost = ({ isEdit }) => {
         let formData = new FormData()
         for (let i of files) {
             formData.append('file', i)
-            formData.append('upload_preset', process.env.REACT_APP_UPLOAD_ASSETS_NAME)
+            formData.append('upload_preset', process.env.REACT_APP_UPLOAD_ASSET_NAME)
             let response = await apiUploadImages(formData)
             if (response.status === 200) images = [...images, response.data?.secure_url]
         }
@@ -72,16 +71,16 @@ const CreatePost = ({ isEdit }) => {
         let priceCode = priceCodeArr[priceCodeArr.length - 1]?.code
         let acreageCodeArr = getCodesAcreage(+payload.acreageNumber, acreage, 0, 90)
         let acreageCode = acreageCodeArr[0]?.code
-
         let finalPayload = {
             ...payload,
             priceCode,
             acreageCode,
-            userId: currentData.id,
+            userId: currentUser.id,
             priceNumber: +payload.priceNumber / Math.pow(10, 6),
             target: payload.target || 'All',
             label: `${categories?.find(item => item.code === payload?.categoryCode)?.value} ${payload?.address?.split(',')[0]}`
         }
+
         const result = validate(finalPayload, setInvalidFields)
         if (result === 0) {
             if (isEdit) {
@@ -104,7 +103,7 @@ const CreatePost = ({ isEdit }) => {
             const response = await apiCreateNewPost(finalPayload)
             if (response?.data.err === 0) {
                 Swal.fire('Success', 'New post is created', 'success').then(() => {
-
+                    resetPayload()
                 })
             }
             else {
@@ -172,8 +171,8 @@ const CreatePost = ({ isEdit }) => {
                             </div>
                         </div>
                     </div>
+                    <Button onClick={handleSubmit} text={isEdit ? 'Edit Post' : 'Create New'} bgColor={'bg-green-600'} textColor={'text-white'} />
                 </div>
-                <Button onClick={handleSubmit} text={isEdit ? 'Edit Post' : 'Create New'} bgColor={'bg-green-600'} textColor={'text-white'} />
                 <div className='w-[30%] flex-none'>
                     map
                 </div>

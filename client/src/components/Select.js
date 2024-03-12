@@ -23,17 +23,17 @@ const Select = ({ label, options, value, setValue, type, reset, name, invalidFie
                 {options?.map(item => {
                     return (
                         <option
-                            value={type === 'province' ? item?.province_id : type === 'district' ? item?.district_id : item?.code}
-                            key={type === 'province' ? item?.province_id : type === 'district' ? item?.district_id : item?.code}
+                            value={type === 'area' ? item?.province_id : type === 'district' ? item?.district_id : item?.code}
+                            key={type === 'area' ? item?.province_id : type === 'district' ? item?.district_id : item?.code}
                         >
-                            {type === 'province' ? item?.province_name : type === 'district' ? item?.district_name : item?.value}
+                            {type === 'area' ? item?.province_name : type === 'district' ? item?.district_name : item?.value}
                         </option>
                     )
                 })}
             </select>
-            (invalidFields && <small className='text-red-500'>
+            {invalidFields && <small className='text-red-500'>
                 {handleTextError()}
-            </small>)
+            </small>}
         </div>
     )
 }

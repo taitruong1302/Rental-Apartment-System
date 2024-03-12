@@ -174,7 +174,7 @@ export const getAdminLimitPostsService = (page, id, query) => new Promise(async 
                 { model: db.Image, as: 'images', attributes: ['image'] },
                 { model: db.Attribute, as: 'attribute', attributes: ['price', 'acreage', 'published', 'hashtag'] },
                 { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
-                { model: db.Overview, as: 'overviews' }
+                { model: db.Overview, as: 'overview' }
             ],
             // attributes: ['id', 'title', 'star', 'address', 'description']
         })
@@ -211,10 +211,12 @@ export const updatePost = ({ postId, overviewId, imagesId, attributeId, ...body 
         }, {
             where: { id: attributeId }
         })
-        await db.Image.create({
+        await db.Image.update({
             image: JSON.stringify(body.images)
-        }, { where: { id: imagesId } })
-        await db.Overview.create({
+        }, {
+            where: { id: imagesId }
+        })
+        await db.Overview.update({
             area: body.label,
             type: body?.category,
             target: body?.target,
@@ -245,6 +247,21 @@ export const updatePost = ({ postId, overviewId, imagesId, attributeId, ...body 
         resolve({
             err: 0,
             msg: 'Update Successfully',
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const deletePost = (postId) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Post.destroy({
+            where: { id: postId }
+        })
+        resolve({
+            err: response > 0 ? 0 : 1,
+            msg: response > 0 ? 'OK' : 'No post deleted',
+            response
         })
     } catch (error) {
         reject(error)

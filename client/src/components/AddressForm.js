@@ -13,16 +13,20 @@ const AddressForm = ({ setPayload, invalidFields, setInvalidFields }) => {
     const [reset, setReset] = useState(false)
 
     useEffect(() => {
-        let addressArr = dataEdit?.address?.split(',')
-        let foundProvince = provinces.length > 0 && provinces?.find(item => item.province_name === addressArr[addressArr.length - 1]?.trim())
-        setProvince(foundProvince ? foundProvince.province_id : '')
-    }, [provinces])
+        if (dataEdit) {
+            let addressArr = dataEdit?.address?.split(',')
+            let foundProvince = provinces?.length > 0 && provinces?.find(item => item.province_name === addressArr[addressArr.length - 1]?.trim())
+            setProvince(foundProvince ? foundProvince.province_id : '')
+        }
+    }, [provinces, dataEdit])
 
     useEffect(() => {
-        let addressArr = dataEdit?.address?.split(',')
-        let foundDistrict = districts.length > 0 && districts?.find(item => item.district_name === addressArr[addressArr.length - 1]?.trim())
-        setDistrict(foundDistrict ? foundDistrict.district_id : '')
-    }, [districts])
+        if (dataEdit) {
+            let addressArr = dataEdit?.address?.split(',')
+            let foundDistrict = districts?.length > 0 && districts?.find(item => item.district_name === addressArr[addressArr.length - 2]?.trim())
+            setDistrict(foundDistrict ? foundDistrict.district_id : '')
+        }
+    }, [districts, dataEdit])
 
     useEffect(() => {
         const fetchProvinces = async () => {
@@ -50,7 +54,7 @@ const AddressForm = ({ setPayload, invalidFields, setInvalidFields }) => {
         setPayload(prev => ({
             ...prev,
             address: `${district ? `${districts?.find(item => item.district_id === district)?.district_name}, ` : ''}${province ? provinces?.find(item => item.province_id === province)?.province_name : ''}`,
-            province: province ? provinces?.find(item => item.province_id === province)?.province_name : ''
+            area: province ? provinces?.find(item => item.province_id === province)?.province_name : ''
         }))
     }, [province, district])
     return (
@@ -58,7 +62,7 @@ const AddressForm = ({ setPayload, invalidFields, setInvalidFields }) => {
             <h2 className='font-semibold text-xl py-4'>Address</h2>
             <div className='flex flex-col gap-4'>
                 <div className='flex items-center gap-4'>
-                    <Select setInvalidFields={setInvalidFields} invalidFields={invalidFields} type='province' value={province} setValue={setProvince} label='City' options={provinces} />
+                    <Select setInvalidFields={setInvalidFields} invalidFields={invalidFields} type='area' value={province} setValue={setProvince} label='City' options={provinces} />
                     <Select setInvalidFields={setInvalidFields} invalidFields={invalidFields} reset={reset} type='district' value={district} setValue={setDistrict} label='District' options={districts} />
                 </div>
                 <InputReadOnly label={'Address'} value={`${district ? `${districts?.find(item => item.district_id === district)?.district_name},` : ''} ${province ? provinces?.find(item => item.province_id === province)?.province_name : ''} `} />

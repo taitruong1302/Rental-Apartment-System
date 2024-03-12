@@ -20,10 +20,10 @@ const DetailForm = ({ payload, setPayload, invalidFields, setInvalidFields }) =>
                 <div className='w-1/2'>
                     <Select value={payload.categoryCode} setValue={setPayload} name='categoryCode' label="Type of post" options={categories} invalidFields={invalidFields} setInvalidFields={setInvalidFields} />
                 </div>
-                <InputFormV2 label={'Subject'} name='title' value={payload.title} setValue={setPayload} />
+                <InputFormV2 label={'Subject'} name='title' value={payload.title} setValue={setPayload} setInvalidFields={setInvalidFields} />
                 <div className='flex flex-col gap-2'>
                     <label htmlFor='description'>Description</label>
-                    <textarea id='description' cols={30} rows={10} className='w-full rounded-md border outline-none border-gray-300 p-2' onFocus={() => setInvalidFields([])} />
+                    <textarea id='description' cols={30} rows={10} className='w-full rounded-md border outline-none border-gray-300 p-2' onFocus={() => setInvalidFields([])} value={payload.description} onChange={e => setPayload(prev => ({ ...prev, description: e.target.value }))} />
                     <small className='text-red-500'>
                         {invalidFields?.some(item => item.name === 'description') && invalidFields?.find(item => item.name === 'description')?.message}
                     </small>

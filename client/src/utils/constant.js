@@ -10,7 +10,8 @@ export const path = {
     SEARCH: 'search',
     SYSTEM: '/system/*',
     CREATE_POST: 'create-new-post',
-    MANAGE_POST: 'manage-post'
+    MANAGE_POST: 'manage-post',
+    EDIT_ACCOUNT: 'profile'
 }
 
 export const location = [

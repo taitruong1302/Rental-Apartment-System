@@ -58,7 +58,7 @@ const Item = ({ images, address, attribute, description, star, title, user, id }
                     </span>
                 </div>
                 <p className='text-gray-500 w-full h-[100px] text-ellipsis overflow-hidden'>
-                    {description.map(item => item + ' ')}
+                    {Array.isArray(description) ? description.map(item => item + ' ') : description}
                 </p>
                 <div className='flex items-center my-3 justify-between'>
                     <div className='flex items-center '>

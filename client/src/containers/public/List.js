@@ -39,6 +39,7 @@ const List = ({ categoryCode }) => {
             </div>
             <div className='items'>
                 {posts.length > 0 && posts.map(item => {
+                    console.log(item.description);
                     return (
                         <Item
                             key={item?.id}
