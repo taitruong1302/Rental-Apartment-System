@@ -13,9 +13,9 @@ const ManagePost = () => {
 	const { userPosts, dataEdit } = useSelector(state => state.post)
 	const [updateData, setUpdateData] = useState(false)
 	const [filteredPosts, setFilteredPosts] = useState([])
-
+	console.log(dataEdit.length);
 	useEffect(() => {
-		!dataEdit && dispatch(actions.getAdminLimitPosts())
+		dispatch(actions.getAdminLimitPosts())
 	}, [dataEdit, updateData])
 
 	useEffect(() => {
@@ -85,7 +85,7 @@ const ManagePost = () => {
 								<tr className='flex h-16 items-center' key={item.id}>
 									<td className='border px-2 flex-1 h-full flex justify-center items-center'>{item?.overview?.code}</td>
 									<td className='border px-2 flex-1 h-full flex items-center justify-center p-2'>
-										<img src={JSON.parse(item?.images?.image)[0] || ''} alt='image-post' className='w-10 h-10 object-cover rounded-md' />
+										<img src={JSON.parse(item?.images?.image)[0] || ''} alt='post' className='w-10 h-10 object-cover rounded-md' />
 									</td>
 									<td className='border px-2 flex-1 h-full flex justify-center items-center'>{`${item?.title?.slice(0, 20)}...`}</td>
 									<td className='border px-2 flex-1 h-full flex justify-center items-center'>{item?.attribute?.price}</td>

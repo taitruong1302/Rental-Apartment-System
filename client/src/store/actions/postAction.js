@@ -12,13 +12,36 @@ export const getPosts = () => async (dispatch) => {
         }
         else {
             dispatch({
-                type: actionTypes.REGISTER_FAIL,
+                type: actionTypes.GET_POSTS,
                 msg: response.data.msg
             })
         }
     } catch (error) {
         dispatch({
             type: actionTypes.GET_POSTS,
+            post: null
+        })
+    }
+}
+
+export const getPostById = (query) => async (dispatch) => {
+    try {
+        const response = await postService.apiGetPostById(query)
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.GET_POST_BY_ID,
+                posts: response.data.response
+            })
+        }
+        else {
+            dispatch({
+                type: actionTypes.GET_POST_BY_ID,
+                msg: response.data.msg
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_POST_BY_ID,
             post: null
         })
     }
@@ -84,14 +107,14 @@ export const getNewPosts = () => async (dispatch) => {
         }
         else {
             dispatch({
-                type: actionTypes.GET_LIMIT_POSTS,
+                type: actionTypes.GET_NEW_POST,
                 msg: response.data.msg,
                 newPosts: null
             })
         }
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_LIMIT_POSTS,
+            type: actionTypes.GET_NEW_POST,
             newPosts: null
         })
     }

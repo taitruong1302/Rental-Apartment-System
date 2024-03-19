@@ -1,15 +1,13 @@
 import React, { memo, useState } from 'react'
 import { GrStar } from 'react-icons/gr'
 import { RiHeartFill, RiHeartLine } from 'react-icons/ri'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { formatLink } from '../utils/common/formatLink'
 import avatar from '../assets/logo.png'
 
 const indexes = [0, 1, 2, 3]
 const Item = ({ images, address, attribute, description, star, title, user, id }) => {
     const [isHoverHeart, setIsHoverHeart] = useState(false)
-    const navigate = useNavigate()
-
     const handleStar = (star) => {
         let stars = []
         for (let i = 0; i < +star; i++) {
@@ -37,7 +35,7 @@ const Item = ({ images, address, attribute, description, star, title, user, id }
             </Link>
             <div className='w-3/5'>
                 <div className='flex justify-content gap-2'>
-                    <div className=''>
+                    <Link to={`detail/${formatLink(title)}/${id}`}>
                         <span className='text-red-600 font-medium'>
                             {handleStar(+star).map((star, index) => {
                                 return (
@@ -46,7 +44,7 @@ const Item = ({ images, address, attribute, description, star, title, user, id }
                             })}
                             {title}
                         </span>
-                    </div>
+                    </Link>
                 </div>
                 <div className='my-2 flex items-center justify-between'>
                     <span className='font-bold flex-1 text-green-600 whitespace-nowrap overflow-hidden text-ellipsis'>

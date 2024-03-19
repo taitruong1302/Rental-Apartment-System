@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { DetailPost, Home, HomePage, Login, Rental, SearchDetail } from "./containers/public";
 import { path } from "./utils/constant";
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { System, CreatePost, ManagePost, EditAccount } from './containers/system'
 import { useEffect } from "react";
@@ -10,8 +10,7 @@ import { useDispatch, useSelector } from 'react-redux/'
 
 function App() {
   const dispatch = useDispatch()
-  const { currentUser } = useSelector(state => state.user)
-  const { isLoggedIn, token } = useSelector(state => state.auth)
+  const { isLoggedIn } = useSelector(state => state.auth)
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,7 +36,6 @@ function App() {
           <Route path={path.PREMISES} element={<Rental />} />
           <Route path={path.SEARCH} element={<SearchDetail />} />
           <Route path={path.DETAIL_POST__TITLE__POSTID} element={<DetailPost />} />
-          <Route path={'detail/*'} element={<DetailPost />} />
         </Route>
 
         <Route path={path.SYSTEM} element={<System />}>

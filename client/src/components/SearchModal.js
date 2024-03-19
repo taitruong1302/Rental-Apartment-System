@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { GrPrevious } from 'react-icons/gr'
 import { getNumberFromAcreage, getNumberFromPrice } from '../utils/common/getNumber'
-import { getCodesPrice, getCodesAcreage } from '../utils/common/getCodes'
 
 const SearchModal = ({ setIsShowModal, content, name, handleSubmit, query, arrMinMax, defaultText }) => {
     const [percent1, setPercent1] = useState(name === 'price' && arrMinMax?.priceArr
@@ -81,11 +80,11 @@ const SearchModal = ({ setIsShowModal, content, name, handleSubmit, query, arrMi
     const handleBeforeSubmit = (e) => {
         let min = percent1 < percent2 ? percent1 : percent2
         let max = percent1 < percent2 ? percent2 : percent1
-        let arrMinMax = [convert100toTarget(percent1), convert100toTarget(percent2)]
+        let arrMinMax = (percent1 === percent2 && percent1 === 100) ? [convert100toTarget(100), 999999] : [convert100toTarget(percent1), convert100toTarget(percent2)]
 
         handleSubmit(e, {
             [`${name}Number`]: arrMinMax,
-            [name]: `From ${convert100toTarget(min)} - ${convert100toTarget(max)} ${name === 'price' ? 'M' : 'm2'}`
+            [name]: (percent1 === percent2 && percent1 === 100) ? `Over ${convert100toTarget(min)} ${name === 'price' ? 'M' : 'm2'}` : `From ${convert100toTarget(min)} - ${convert100toTarget(max)} ${name === 'price' ? 'M' : 'm2'}`
 
         }, {
             [`${name}Arr`]: [min, max]

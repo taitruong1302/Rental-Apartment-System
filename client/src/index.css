@@ -60,3 +60,19 @@ input[type="range"]::-ms-thumb{
     pointer-events: auto;
     cursor: pointer;
 }
+
+button.slick-arrow::before{
+    font-size: 50px !important;
+    color: rgb(243, 203, 22) !important;
+}
+
+.slick-next{
+    right: 35px;
+    top: 45%;
+}
+
+.slick-prev{
+    left: 10px;
+    z-index: 10;
+    top: 45%;
+}

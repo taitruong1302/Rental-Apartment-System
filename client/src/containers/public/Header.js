@@ -14,7 +14,6 @@ import { LuLogOut } from 'react-icons/lu'
 const Header = () => {
     const navigate = useNavigate()
     const { isLoggedIn } = useSelector(state => state.auth)
-    const { currentUser } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const headerRef = useRef()
     const [searchParams] = useSearchParams()
@@ -26,7 +25,6 @@ const Header = () => {
     const goToHome = useCallback(() => {
         navigate(path.HOME)
     })
-
     useEffect(() => {
         headerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, [searchParams.get('page')])
@@ -88,6 +86,7 @@ const Header = () => {
                         text='New Post'
                         textColor='text-white'
                         bgColor='bg-secondary2'
+                        onClick={() => navigate(`${path.SYSTEM}${path.CREATE_POST}`)}
                     />
                 </div>
 

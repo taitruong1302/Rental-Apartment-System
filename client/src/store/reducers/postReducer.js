@@ -13,6 +13,7 @@ const postReducer = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.GET_POSTS:
         case actionTypes.GET_LIMIT_POSTS:
+        case actionTypes.GET_POST_BY_ID:
             return {
                 ...state,
                 posts: action.posts || [],

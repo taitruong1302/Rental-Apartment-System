@@ -4,6 +4,7 @@ import verifyToken from '../middleware/verifyToken'
 
 const router = express.Router()
 router.get('/getAll', postController.getPosts)
+router.get('/getById', postController.getPostById)
 router.get('/getLimit', postController.getLimitPosts)
 router.get('/getNewPost', postController.getNewPosts)
 

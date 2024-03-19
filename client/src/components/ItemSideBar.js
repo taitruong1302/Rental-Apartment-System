@@ -1,8 +1,7 @@
 import React, { memo } from 'react'
 import { GrNext } from 'react-icons/gr'
 import { formatLink } from '../utils/common/formatLink'
-import { Link, Navigate } from 'react-router-dom'
-import * as actions from '../store/actions'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 

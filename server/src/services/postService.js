@@ -27,7 +27,31 @@ export const getPostsService = () => new Promise(async (resolve, reject) => {
     }
 })
 
-export const getLimitPostsService = (page, query, { priceNumber, acreageNumber }) => new Promise(async (resolve, reject) => {
+export const getPostByIdService = (id) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Post.findOne({
+            where: { id: id },
+            raw: true,
+            nest: true,
+            include: [
+                { model: db.Image, as: 'images', attributes: ['image'] },
+                { model: db.Attribute, as: 'attribute', attributes: ['price', 'acreage', 'published', 'hashtag'] },
+                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
+                { model: db.Overview, as: 'overview' }
+            ],
+            attributes: ['id', 'title', 'star', 'address', 'description']
+        })
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'OK' : 'Get post by id unsuccessfully',
+            response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const getLimitPostsService = (page, { limit, order, ...query }, { priceNumber, acreageNumber }) => new Promise(async (resolve, reject) => {
     try {
         let offset = (!page || +page <= 1) ? 0 : (+page - 1)
         const queries = { ...query }
@@ -35,17 +59,20 @@ export const getLimitPostsService = (page, query, { priceNumber, acreageNumber }
             queries.priceNumber = { [Op.between]: priceNumber }
         if (acreageNumber)
             queries.acreageNumber = { [Op.between]: acreageNumber }
+        if (order)
+            queries.order = [order]
         const response = await db.Post.findAndCountAll({
-            where: queries,
+            where: query,
             raw: true,
             nest: true,
             offset: offset * +process.env.LIMIT,
             limit: +process.env.LIMIT,
-            order: [['createdAt', 'DESC']],
+            ...queries,
             include: [
                 { model: db.Image, as: 'images', attributes: ['image'] },
                 { model: db.Attribute, as: 'attribute', attributes: ['price', 'acreage', 'published', 'hashtag'] },
-                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] }
+                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
+                { model: db.Overview, as: 'overview' }
             ],
             attributes: ['id', 'title', 'star', 'address', 'description']
         })

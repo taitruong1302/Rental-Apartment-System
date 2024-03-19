@@ -1,34 +1,39 @@
 import React, { useState } from 'react'
 import { InputReadOnly, InputFormV2, Button } from '../../components'
 import avatar from "../../assets/avatar.png"
-import { useSelector } from 'react-redux'
-import { apiUploadImages, apiUpdateUserInfor } from '../../services'
+import { useDispatch, useSelector } from 'react-redux'
+import { apiUpdateUserInfor } from '../../services'
+import { fileToBase64, blobToBase64 } from '../../utils/common/toBase64'
+import { getCurrentUserInfor } from '../../store/actions'
+import Swal from 'sweetalert2'
 
 const EditAccount = () => {
     const { currentUser } = useSelector(state => state.user)
+    const dispatch = useDispatch()
     const [payload, setPayload] = useState({
         name: currentUser?.name || '',
-        avatar: currentUser?.avatar || '',
+        avatar: blobToBase64(currentUser?.avatar) || '',
         fbUrl: currentUser?.fbUrl || '',
         zalo: currentUser?.zalo || ''
     })
 
     const handleUploadFile = async (e) => {
-        const image = e.target.files[0]
-        const formData = new FormData()
-        formData.append('file', image)
-        formData.append('upload_preset', process.env.REACT_APP_UPLOAD_ASSET_NAME)
-        const response = await apiUploadImages(formData)
-        if (response.status === 200) {
-            setPayload(prev => ({
-                ...prev,
-                avatar: response.data.secure_url
-            }))
-        }
+        const imageBase64 = await fileToBase64(e.target.files[0])
+        setPayload(prev => ({
+            ...prev,
+            avatar: imageBase64
+        }))
     }
 
     const handleSubmit = async () => {
         const response = await apiUpdateUserInfor(payload)
+        if (response?.data.err === 0) {
+            Swal.fire("Done", "Update profile successfully", 'success').then(() => {
+                dispatch(getCurrentUserInfor())
+            })
+        } else {
+            Swal.fire("Oops!", "Update profile failed", "error")
+        }
     }
 
     return (

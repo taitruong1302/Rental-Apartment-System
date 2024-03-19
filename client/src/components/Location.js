@@ -11,6 +11,7 @@ const Location = () => {
                         key={item.id}
                         name={item.name}
                         image={item.image}
+                        provinceCode={item.provinceCode}
                     />
                 )
             })}

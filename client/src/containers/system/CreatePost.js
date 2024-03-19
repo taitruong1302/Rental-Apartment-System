@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 import validate from '../../utils/common/validateFields'
 import { useDispatch } from 'react-redux'
 import { resetEditData } from '../../store/actions'
+import Map from '../../components/Map'
 
 const CreatePost = ({ isEdit }) => {
     const { dataEdit } = useSelector(state => state.post)
@@ -174,7 +175,7 @@ const CreatePost = ({ isEdit }) => {
                     <Button onClick={handleSubmit} text={isEdit ? 'Edit Post' : 'Create New'} bgColor={'bg-green-600'} textColor={'text-white'} />
                 </div>
                 <div className='w-[30%] flex-none'>
-                    map
+                    <Map address={payload.address} />
                 </div>
             </div>
         </div>

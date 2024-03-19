@@ -1,10 +1,8 @@
 import React from 'react'
 import logo from '../assets/logo.png'
-import { data } from '../utils/data'
 import { GrLocation, GrPhone } from 'react-icons/gr'
 import { HiOutlineMailOpen } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
-import { path } from '../utils/constant'
 
 const Footer = () => {
     return (
